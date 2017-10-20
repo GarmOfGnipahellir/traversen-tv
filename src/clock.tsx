@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface State {
     interval: NodeJS.Timer;
     time: string;
+    happyHour: boolean;
 }
 
 class Clock extends React.Component<any, State> {
@@ -12,6 +13,7 @@ class Clock extends React.Component<any, State> {
         this.state = {
             ...this.state,
             time: this.getTime(),
+            happyHour: true,
         };
     }
 
@@ -29,7 +31,8 @@ class Clock extends React.Component<any, State> {
     tick() {
         this.setState({
             ...this.state,
-            time: this.getTime()
+            time: this.getTime(),
+            happyHour: new Date().getHours() < 22,
         });
     }
 
@@ -40,6 +43,7 @@ class Clock extends React.Component<any, State> {
     render() {
         return (
             <div style={styles.container}>
+                <div style={{fontSize: 45, display: this.state.happyHour ? 'block' : 'none'}}>HAPPY HOUR</div>
                 <div>{this.state.time}</div>
             </div>
         );
@@ -48,10 +52,12 @@ class Clock extends React.Component<any, State> {
 
 const styles = {
     container: {
+        background: '#222',
+        color: 'white',
         position: 'absolute',
-        left: 0,
-        bottom: 0,
-        margin: 20,
+        left: 10,
+        bottom: 10,
+        padding: 10,
         fontSize: '72px',
     }
 }
