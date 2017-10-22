@@ -1,10 +1,11 @@
 import * as React from 'react';
 import Slide from './slide';
+import { remote } from 'electron';
 
 export interface State {
     interval: NodeJS.Timer;
     currentSlide: number;
-    numSlides: number;
+    slides: string[];
 }
 
 class SlideShow extends React.Component<any, State> {
@@ -14,7 +15,7 @@ class SlideShow extends React.Component<any, State> {
         this.state = {
             ...this.state,
             currentSlide: 0,
-            numSlides: 12,
+            slides: remote.getGlobal('slides'),
         };
     }
 
@@ -32,14 +33,16 @@ class SlideShow extends React.Component<any, State> {
     changeSlide() {
         this.setState({
             ...this.state,
-            currentSlide: (this.state.currentSlide + 1) % this.state.numSlides,
+            currentSlide: (this.state.currentSlide + 1) % this.state.slides.length,
         });
     }
 
     render() {
         return (
             <div style={styles.container}>
-                {[...Array(this.state.numSlides)].map((x, i) => <Slide visible={i == this.state.currentSlide} index={i} image={'../assets/images/slide_'+(i+1)+'.jpg'} />)}
+                {this.state.slides.map((item, i) => 
+                    <Slide visible={i == this.state.currentSlide} key={i} image={item} />
+                )}
             </div>
         );
     }
@@ -54,6 +57,5 @@ const styles = {
         fontSize: '72px',
     }
 };
-
 
 export default SlideShow;

@@ -1,7 +1,9 @@
+/* Sets font and makes sure everything fits to the window size */
 html {
     width: 100%;
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    cursor: none;
 }
 body {
   width: 100%;

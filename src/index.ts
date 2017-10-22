@@ -15,9 +15,10 @@ if (isDevMode) {
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    title: 'Traversen TV',
     width: 800,
     height: 600,
-    fullscreen: true,
+    fullscreen: false,
     autoHideMenuBar: true,
   });
 
@@ -63,3 +64,13 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+import * as fs from 'fs';
+let slideDir = 'C:/TraversenTvSlides';
+fs.readdir(slideDir, (err, files) => {
+  if (err) {
+    throw err;
+  } else {
+    let filePaths = files.map((item, i) => slideDir + '/' + item);
+    global.slides = filePaths;
+  }
+});

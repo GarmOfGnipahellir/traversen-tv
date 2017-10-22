@@ -2,8 +2,7 @@ import * as React from 'react';
 
 export interface State {
     interval: NodeJS.Timer;
-    time: string;
-    happyHour: boolean;
+    date: Date;
 }
 
 class Clock extends React.Component<any, State> {
@@ -12,8 +11,7 @@ class Clock extends React.Component<any, State> {
 
         this.state = {
             ...this.state,
-            time: this.getTime(),
-            happyHour: true,
+            date: new Date(),
         };
     }
 
@@ -31,20 +29,22 @@ class Clock extends React.Component<any, State> {
     tick() {
         this.setState({
             ...this.state,
-            time: this.getTime(),
-            happyHour: new Date().getHours() < 22,
+            date: new Date(),
         });
     }
 
-    getTime(): string {
-        return new Date().toLocaleTimeString('sv-se');
+    getTimeString(date: Date): string {
+        let options: Intl.DateTimeFormatOptions = {
+            hour: '2-digit',
+            minute: '2-digit',
+        }
+        return date.toLocaleString('sv-se', options);
     }
 
     render() {
         return (
             <div style={styles.container}>
-                <div style={{fontSize: 45, display: this.state.happyHour ? 'block' : 'none'}}>HAPPY HOUR</div>
-                <div>{this.state.time}</div>
+                <div>{this.getTimeString(this.state.date)}</div>
             </div>
         );
     }
@@ -53,6 +53,7 @@ class Clock extends React.Component<any, State> {
 const styles = {
     container: {
         background: '#222',
+        opacity: 0.5,
         color: 'white',
         position: 'absolute',
         left: 10,

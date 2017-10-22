@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface Props {
     visible: boolean;
-    index: number;
+    key: number;
     image: string;
 }
 
@@ -30,6 +30,7 @@ const styles = {
     image: {
         width: '100%',
         height: '100%',
+        objectFit: 'cover',
     }
 }
 
