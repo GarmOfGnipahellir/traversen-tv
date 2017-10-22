@@ -19,7 +19,7 @@ const createWindow = async () => {
     width: 800,
     height: 600,
     fullscreen: false,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
   });
 
   // and load the index.html of the app.
@@ -64,13 +64,15 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+import { nativeImage } from 'electron';
 import * as fs from 'fs';
+
 let slideDir = 'C:/TraversenTvSlides';
 fs.readdir(slideDir, (err, files) => {
   if (err) {
     throw err;
   } else {
-    let filePaths = files.map((item, i) => slideDir + '/' + item);
-    global.slides = filePaths;
+    let images = files.map((item, i) => nativeImage.createFromPath(slideDir + '/' + item).toDataURL());
+    global.slides = images;
   }
 });
