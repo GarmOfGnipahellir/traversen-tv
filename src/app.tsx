@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SlideShow from './slide-show';
-import Clock from './clock';
+import { Clock } from './containers/Clock';
 
 export class App extends React.Component<undefined, undefined> {
   render() {
