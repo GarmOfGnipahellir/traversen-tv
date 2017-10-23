@@ -26,7 +26,7 @@ import appReducer from './reducers';
 const store = Redux.createStore(appReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 let render = () => {
-  const { App } = require('./app');
+  const { App } = require('./App');
   ReactDOM.render(<AppContainer><Provider store={store}><App /></Provider></AppContainer>, document.getElementById('App'));
 }
 
