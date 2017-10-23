@@ -11,3 +11,6 @@ export const actionCreators = {
         type: TICK_CLOCK,
     }),
 }
+
+export type RootAction = 
+    | Actions[keyof Actions];

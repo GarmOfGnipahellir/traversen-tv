@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { State } from '../reducers';
+import { RootState } from '../reducers';
 import { actionCreators } from '../actions';
 import { DigitalTime } from '../components/DigitalTime';
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: RootState) => ({
     date: state.date,
 });
 

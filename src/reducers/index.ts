@@ -1,15 +1,14 @@
-import * as Redux from 'redux';
-import { TICK_CLOCK } from '../actions';
+import { RootAction, TICK_CLOCK } from '../actions';
 
-export type State = {
+export type RootState = {
     readonly date: Date,
 };
 
-export const initialState: State = {
+export const initialState: RootState = {
     date: new Date(),
 };
 
-const appReducer = (state: State = initialState, action: Redux.Action): State => {
+const appReducer = (state: RootState = initialState, action: RootAction): RootState => {
     switch (action.type) {
         case TICK_CLOCK:
             return {...state, date: new Date()};
