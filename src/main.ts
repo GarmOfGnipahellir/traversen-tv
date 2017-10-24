@@ -20,6 +20,7 @@ const createWindow = async () => {
     height: 600,
     fullscreen: false,
     autoHideMenuBar: true,
+    icon: `${__dirname}/../assets/icons/png/favicon64x64.png`,
   });
 
   // and load the index.html of the app.
@@ -29,6 +30,8 @@ const createWindow = async () => {
   if (isDevMode) {
     await installExtension(REACT_DEVELOPER_TOOLS);
     mainWindow.webContents.openDevTools();
+  } else  {
+    mainWindow.setFullScreen(true);
   }
 
   // Emitted when the window is closed.
