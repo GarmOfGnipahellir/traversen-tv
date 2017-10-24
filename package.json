@@ -3,7 +3,7 @@
   "productName": "Traversen TV",
   "version": "0.2.0",
   "description": "Simple application for Campus Skellefteå's student pub Traversen's TV.",
-  "main": "src/index.ts",
+  "main": "src/main.ts",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",

@@ -19,7 +19,7 @@ const createWindow = async () => {
     width: 800,
     height: 600,
     fullscreen: false,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
   });
 
   // and load the index.html of the app.
