@@ -6,6 +6,7 @@
   <!-- Load stylesheets -->
   <link rel="stylesheet" href="index.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <!-- Content (App) -->
@@ -18,12 +19,26 @@
 <script type="text/tsx">
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import * as Redux from 'redux';
 import { Provider } from 'react-redux';
-import { AppContainer } from 'react-hot-loader';
+import {
+  forwardToMain,
+  replayActionRenderer,
+  getInitialStateRenderer,
+} from 'electron-redux';
 import appReducer from './reducers';
 
-const store = Redux.createStore(appReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose;
+const store = Redux.createStore(
+  appReducer,
+  getInitialStateRenderer(),
+  composeEnhancers(Redux.applyMiddleware(
+    forwardToMain
+  ))
+);
+
+replayActionRenderer(store);
 
 let render = () => {
   const { App } = require('./App');

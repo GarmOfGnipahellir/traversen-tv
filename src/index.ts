@@ -9,7 +9,7 @@ let mainWindow: Electron.BrowserWindow | null = null;
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
 if (isDevMode) {
-  enableLiveReload({strategy: 'react-hmr'});
+  enableLiveReload({ strategy: 'react-hmr' });
 }
 
 const createWindow = async () => {
@@ -19,7 +19,7 @@ const createWindow = async () => {
     width: 800,
     height: 600,
     fullscreen: false,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
   });
 
   // and load the index.html of the app.
@@ -79,3 +79,25 @@ fs.readdir(slideDir, (err, files) => {
     global.slides = images;
   }
 });
+
+// Redux Setup
+import {
+  createStore,
+  applyMiddleware,
+} from 'redux';
+import {
+  forwardToRenderer,
+  triggerAlias,
+  replayActionMain,
+} from 'electron-redux';
+import appReducer from './reducers';
+
+const store = createStore(
+  appReducer,
+  applyMiddleware(
+    triggerAlias,
+    forwardToRenderer
+  )
+);
+
+replayActionMain(store);
