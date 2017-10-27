@@ -50,7 +50,7 @@ class SlideShow extends React.Component<any, State> {
 
 const styles = {
     container: {
-        zIndex: -1,
+        zIndex: -10,
         background: '#222',
         width: '100%',
         height: '100%',

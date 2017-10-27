@@ -52,6 +52,7 @@ class Clock extends React.Component<any, State> {
 
 const styles = {
     container: {
+        zIndex: 11,
         background: '#222',
         opacity: 0.5,
         color: 'white',

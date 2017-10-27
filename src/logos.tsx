@@ -7,8 +7,9 @@ export interface Props {
 export const Logos: React.StatelessComponent<Props> = (props) => {
     const styles = {
         container: {
+            zIndex: 10,
             position: 'absolute',
-            opacity: 0.5,
+            opacity: 0.75,
             right: 10,
             bottom: 10,
             padding: 10,

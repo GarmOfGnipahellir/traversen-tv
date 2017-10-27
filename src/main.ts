@@ -71,6 +71,11 @@ import { nativeImage } from 'electron';
 import * as fs from 'fs';
 
 let slideDir = 'C:/TraversenTvSlides';
+switch (process.platform) {
+  case 'darwin':
+    // QUICK HACK
+    slideDir = '/Users/hmelsom/Google Drive/LTU/Phöseriet/Phösarkampen 2017/Phösar Bilder';
+}
 fs.readdir(slideDir, (err, files) => {
   if (err) {
     throw err;
